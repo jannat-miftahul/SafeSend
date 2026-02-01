@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Generated Output Files
+DecodedFile.txt
+
+# Project Specific - User Data
+src/web-application/media/text-files/*
+!src/web-application/media/text-files/.gitkeep
+
+src/web-application/media/public-keys/*
+!src/web-application/media/public-keys/.gitkeep
+
+src/web-application/media/database/*.pickle
+!src/web-application/media/database/.gitkeep
+
+# Flask
+instance/
+.webassets-cache
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log

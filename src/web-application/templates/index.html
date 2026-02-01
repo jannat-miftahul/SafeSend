@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section">
+	<div class="hero-badge">End-to-End Encryption</div>
+	<h1 class="hero-title">Secure File Transfer <br> <span class="text-gradient">Made Simple.</span></h1>
+	<p class="hero-subtitle">
+		Share files securely with anyone, anywhere. Powered by Diffie-Hellman Key Exchange for ultimate privacy.
+	</p>
+	<div class="hero-actions">
+		<a href="{{ url_for('call_page_register_user') }}" class="btn btn-primary btn-lg">Get Started</a>
+		<a href="#features" class="btn btn-outline btn-lg">Learn More</a>
+	</div>
+</div>
+
+<!-- Features Grid -->
+<div id="features" class="text-center mb-4" style="margin-top: 2rem;">
+	<h2>Everything you need</h2>
+	<p class="text-muted">Powerful features to keep your data safe.</p>
+</div>
+
+<div class="grid">
+	<!-- Upload -->
+	<a href="{{ url_for('call_page_upload') }}" class="feature-link">
+		<div class="feature-card">
+			<div class="icon-wrapper">
+				<i class="fas fa-cloud-upload-alt"></i>
+			</div>
+			<h3>Secure Upload</h3>
+			<p>Encrypt and upload your files to our secure cloud storage with just a click.</p>
+		</div>
+	</a>
+
+	<!-- File Directory -->
+	<a href="{{ url_for('download_f') }}" class="feature-link">
+		<div class="feature-card">
+			<div class="icon-wrapper">
+				<i class="fas fa-folder-open"></i>
+			</div>
+			<h3>File Directory</h3>
+			<p>Browse and download encrypted files shared by others in the network.</p>
+		</div>
+	</a>
+
+	<!-- Public Keys -->
+	<a href="{{ url_for('downloads_pk') }}" class="feature-link">
+		<div class="feature-card">
+			<div class="icon-wrapper">
+				<i class="fas fa-key"></i>
+			</div>
+			<h3>Public Keys</h3>
+			<p>Find and download public keys to send secure messages to your contacts.</p>
+		</div>
+	</a>
+
+	<!-- Register -->
+	<a href="{{ url_for('call_page_register_user') }}" class="feature-link">
+		<div class="feature-card">
+			<div class="icon-wrapper">
+				<i class="fas fa-user-shield"></i>
+			</div>
+			<h3>Identity Protection</h3>
+			<p>Create a unique identity and generate your secure key pair instantly.</p>
+		</div>
+	</a>
+</div>
+
+<!-- How it Works (Steps) -->
+<div class="steps-section">
+	<h2 class="text-center mb-4">How it Works</h2>
+	<div class="steps-grid">
+		<div class="step-card">
+			<div class="step-number">1</div>
+			<h4>Register</h4>
+			<p>Create an account to generate your unique private and public keys.</p>
+		</div>
+		<div class="step-card">
+			<div class="step-number">2</div>
+			<h4>Encrypt</h4>
+			<p>Use the standalone app to encrypt files with the recipient's public key.</p>
+		</div>
+		<div class="step-card">
+			<div class="step-number">3</div>
+			<h4>Upload</h4>
+			<p>Upload the encrypted file to the SafeSend cloud storage.</p>
+		</div>
+		<div class="step-card">
+			<div class="step-number">4</div>
+			<h4>Decrypt</h4>
+			<p>The recipient downloads and decrypts it with their private key.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
