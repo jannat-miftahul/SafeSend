@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Public Keys{% endblock %}
+
+{% block content %}
+<div class="card">
+	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+		<h2><i class="fas fa-key" style="color: var(--primary-color);"></i> Public Key Directory</h2>
+		<a href="{{ url_for('call_page_register_user') }}" class="btn btn-outline">
+			<i class="fas fa-plus"></i> Register New
+		</a>
+	</div>
+
+	{% if msg != '' %}
+	<div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+		<i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
+		<h3>{{ msg }}</h3>
+	</div>
+	{% else %}
+	<div style="overflow-x: auto;">
+		<table>
+			<thead>
+				<tr>
+					<th style="width: 60px;">#</th>
+					<th>Username</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for itr in range(length) %}
+				<tr>
+					<td style="color: var(--text-muted);">{{ itr + 1 }}</td>
+					<td style="font-weight: 600;">{{ directory[itr] }}</td>
+					<td>
+						<a href="retrieve/key/{{ directory[itr] }}" class="btn btn-primary"
+							style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+							<i class="fas fa-download"></i> Download Key
+						</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% endif %}
+</div>
+{% endblock %}
