@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Upload Complete{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+	<div class="card text-center">
+		<div style="margin-bottom: 2rem;">
+			<div
+				style="width: 80px; height: 80px; background: rgba(14, 165, 233, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+				<i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary-color);"></i>
+			</div>
+		</div>
+
+		<h2 class="mb-4">Upload Successful!</h2>
+		<p style="color: var(--text-muted); margin-bottom: 2rem;">
+			Your encrypted file has been securely uploaded to the cloud storage.
+		</p>
+
+		<div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1rem;">
+			<a href="{{ url_for('download_f') }}" class="btn btn-primary" style="justify-content: center;">
+				<i class="fas fa-folder-open"></i> View Files
+			</a>
+			<a href="{{ url_for('call_page_upload') }}" class="btn btn-outline" style="justify-content: center;">
+				<i class="fas fa-plus"></i> Upload Another
+			</a>
+		</div>
+	</div>
+</div>
+{% endblock %}

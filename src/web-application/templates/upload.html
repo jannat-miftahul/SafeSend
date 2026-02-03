@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Upload{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+	<div class="card text-center">
+		<div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+			<i class="fas fa-cloud-upload-alt"></i>
+		</div>
+		<h2 class="mb-4">Upload Encrypted File</h2>
+
+		<p class="mb-4" style="color: var(--text-muted);">
+			Please select the file you wish to upload to the cloud.
+			<br>
+			<span style="color: #fca5a5; font-size: 0.9rem;">
+				<i class="fas fa-exclamation-triangle"></i> Make sure the file has been encrypted using the standalone
+				application first.
+			</span>
+		</p>
+
+		<form action="/data" method="POST" enctype="multipart/form-data" style="margin-top: 2rem;">
+			<div style="border: 2px dashed rgba(148, 163, 184, 0.2); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; transition: border-color 0.3s ease;"
+				onmouseover="this.style.borderColor='var(--primary-color)'"
+				onmouseout="this.style.borderColor='rgba(148, 163, 184, 0.2)'">
+				<input type="file" name="file" required
+					style="background: transparent; border: none; padding: 0; margin: 0;">
+			</div>
+
+			<button type="submit" class="btn btn-primary btn-lg">
+				<i class="fas fa-upload"></i> Upload to Cloud
+			</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
