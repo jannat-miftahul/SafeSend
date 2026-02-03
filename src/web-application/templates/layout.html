@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SafeSend - Secure File Transfer{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="navbar-brand">
+            <i class="fas fa-shield-alt"></i> SafeSend
+        </a>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+            <a href="{{ url_for('call_page_upload') }}" class="nav-link">Upload</a>
+            <a href="{{ url_for('download_f') }}" class="nav-link">Files</a>
+            <a href="{{ url_for('downloads_pk') }}" class="nav-link">Public Keys</a>
+            <a href="{{ url_for('call_page_register_user') }}" class="nav-link btn btn-primary"
+                style="padding: 0.5rem 1rem; color: white;">Register</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="card" style="border-left: 4px solid var(--primary-color);">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="text-center" style="padding: 2rem; color: var(--text-muted); font-size: 0.9rem;">
+        <p>&copy; <span id="current-year"></span> SafeSend Security. Secure Text Transfer using Diffie-Hellman.</p>
+    </footer>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
