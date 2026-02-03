@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Register{% endblock %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 0 auto;">
+	<div class="card text-center">
+		<h2 class="mb-4">Create Account</h2>
+
+		{% if name %}
+		<div
+			style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+			{{ name }}
+		</div>
+		{% endif %}
+
+		<p class="mb-4" style="color: var(--text-muted);">Register to generate your unique public and private keys.</p>
+
+		<form action="/register-new-user" method="POST">
+			<div style="text-align: left; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">Username
+			</div>
+			<input name="username" type="text" placeholder="Choose a unique username" required>
+
+			<div style="text-align: left; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">First
+				Name</div>
+			<input name="first-name" type="text" placeholder="Your first name" required>
+
+			<div style="text-align: left; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">Last Name
+			</div>
+			<input name="last-name" type="text" placeholder="Your last name" required>
+
+			<button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+				Generate Keys & Register
+			</button>
+		</form>
+	</div>
+</div>
+{% endblock %}
