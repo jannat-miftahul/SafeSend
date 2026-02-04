@@ -116,3 +116,57 @@ def upload_file():
 			file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
 			return post_upload_redirect()
 		return 'Invalid File Format !'
+
+'''
+-----------------------------------------------------------
+REGISTER UNIQUE USERNAME AND GENERATE PUBLIC KEY WITH FILE
+-----------------------------------------------------------
+'''
+@app.route('/register-new-user', methods = ['GET', 'POST'])
+def register_user():
+	files = []
+	privatekeylist = []
+	usernamelist = []
+	# Import pickle file to maintain uniqueness of the keys
+	if(os.path.isfile(os.path.join(BASE_DIR, "media", "database", "database.pickle"))):
+		pickleObj = open(os.path.join(BASE_DIR, "media", "database", "database.pickle"),"rb")
+		privatekeylist = pickle.load(pickleObj)
+		pickleObj.close()
+	if(os.path.isfile(os.path.join(BASE_DIR, "media", "database", "database_1.pickle"))):
+		pickleObj = open(os.path.join(BASE_DIR, "media", "database", "database_1.pickle"),"rb")
+		usernamelist = pickle.load(pickleObj)
+		pickleObj.close()
+	# Declare a new list which consists all usernames 
+	if request.form['username'] in usernamelist:
+		return render_template('register.html', name='Username already exists')
+	username = request.form['username']
+	firstname = request.form['first-name']
+	secondname = request.form['last-name']
+	pin = int(random.randint(1,128))
+	pin = pin % 64
+	#Generating a unique private key
+	privatekey = DH.generate_private_key(pin)
+	while privatekey in privatekeylist:
+		privatekey = DH.generate_private_key(pin)
+	privatekeylist.append(str(privatekey))
+	usernamelist.append(username)
+	#Save/update pickle
+	pickleObj = open(os.path.join(BASE_DIR, "media", "database", "database.pickle"),"wb")
+	pickle.dump(privatekeylist,pickleObj)
+	pickleObj.close()
+	pickleObj = open(os.path.join(BASE_DIR, "media", "database", "database_1.pickle"),"wb")
+	pickle.dump(usernamelist,pickleObj)
+	pickleObj.close()
+	#Updating a new public key for a new user
+	filename = os.path.join(UPLOAD_KEY, username+'-'+secondname.upper()+firstname.lower()+'-PublicKey.pem')
+	# Generate public key and save it in the file generated
+	publickey = DH.generate_public_key(privatekey)
+	fileObject = open(filename,"w")
+	fileObject.write(str(publickey))
+	return render_template('key-display.html',privatekey=str(privatekey))
+
+
+	
+if __name__ == '__main__':
+	#app.run(host="0.0.0.0", port=80)
+	app.run()
