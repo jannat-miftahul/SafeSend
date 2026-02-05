@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}SafeSend - Registration Complete{% endblock %}
+
+{% block content %}
+<div style="max-width: 700px; margin: 0 auto;">
+	<div class="card text-center">
+		<div style="margin-bottom: 2rem;">
+			<div
+				style="width: 80px; height: 80px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+				<i class="fas fa-check-circle" style="font-size: 3rem; color: var(--secondary-color);"></i>
+			</div>
+		</div>
+
+		<h2 class="mb-4">Registration Successful!</h2>
+		<p style="color: var(--text-muted); margin-bottom: 2rem;">
+			Your unique private key has been generated. This key is required to decrypt files sent to you.
+		</p>
+
+		<div class="alert"
+			style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 2rem; text-align: left;">
+			<div style="display: flex; gap: 1rem;">
+				<i class="fas fa-exclamation-triangle" style="color: #fca5a5; font-size: 1.5rem;"></i>
+				<div>
+					<h4 style="color: #fca5a5; margin-bottom: 0.5rem;">Important Security Warning</h4>
+					<p style="color: #fca5a5; font-size: 0.9rem; margin: 0;">
+						Do not share this private key with anyone. We do not store a backup of this key.
+						If you lose it, you will not be able to decrypt files sent to you.
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div style="text-align: left; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">Your Private
+			Key</div>
+		<div class="key-display" id="privateKey">
+			{{ privatekey }}
+			<button class="copy-btn" onclick="copyToClipboard('privateKey')">
+				<i class="fas fa-copy"></i> Copy
+			</button>
+		</div>
+
+		<div style="margin-top: 2rem;">
+			<a href="{{ url_for('index') }}" class="btn btn-primary">
+				<i class="fas fa-home"></i> Return Home
+			</a>
+		</div>
+	</div>
+</div>
+
+<script>
+	function copyToClipboard(elementId) {
+		const text = document.getElementById(elementId).innerText.replace(' Copy', '').trim();
+		navigator.clipboard.writeText(text).then(() => {
+			const btn = document.querySelector('.copy-btn');
+			const original = btn.innerHTML;
+			btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+			setTimeout(() => {
+				btn.innerHTML = original;
+			}, 2000);
+		});
+	}
+</script>
+{% endblock %}
